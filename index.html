@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rekalogi — Media Edukasi Politik</title>
+<meta name="description" content="Rekalogi membedah politik jadi bahasa yang bisa dipahami semua orang.">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F6F4EF;
+    --ink: #1E2A22;
+    --moss: #4A5D3A;
+    --moss-light: #E4E9DB;
+    --brass: #B08D57;
+    --muted: #6B6F63;
+    --line: #DDD8CC;
+    --card: #FFFFFF;
+    --radius: 14px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+  ::selection{background:var(--moss); color:#fff;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(246,244,239,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 24px;}
+  .logo{font-family:'Fraunces', serif; font-weight:600; font-size:21px; letter-spacing:0.01em; display:flex; align-items:center;}
+  .logo span{color:var(--moss);}
+  .logo img{height:34px; width:auto; display:block;}
+  footer .logo img{height:30px;}
+  .nav-links{display:flex; gap:32px; font-size:14px; font-weight:500;}
+  .nav-links a{color:var(--muted); transition:color .2s;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--moss); color:#fff; padding:9px 18px;
+    border-radius:100px; font-size:14px; font-weight:500;
+    transition:background .2s;
+  }
+  .nav-cta:hover{background:#3c4a2e;}
+  .menu-toggle{display:none; background:none; border:none; font-size:24px; cursor:pointer; color:var(--ink);}
+
+  /* Hero */
+  .hero{padding:96px 24px 64px;}
+  .hero-inner{max-width:760px; margin:0 auto; text-align:center;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--moss); margin-bottom:22px;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{content:''; width:7px; height:7px; border-radius:50%; background:var(--brass); display:inline-block;}
+  h1{
+    font-family:'Fraunces', serif; font-weight:500; font-size:clamp(34px, 5.4vw, 58px);
+    line-height:1.12; letter-spacing:-0.01em; margin-bottom:22px;
+  }
+  h1 em{font-style:italic; color:var(--moss);}
+  .hero p{font-size:18px; color:var(--muted); max-width:540px; margin:0 auto 34px;}
+  .hero-actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .btn-primary, .btn-secondary{
+    padding:13px 26px; border-radius:100px; font-size:15px; font-weight:500;
+    display:inline-flex; align-items:center; gap:8px; transition:all .2s;
+  }
+  .btn-primary{background:var(--ink); color:#fff;}
+  .btn-primary:hover{background:var(--moss);}
+  .btn-secondary{border:1px solid var(--line); color:var(--ink);}
+  .btn-secondary:hover{border-color:var(--ink);}
+
+  /* Glossary ticker — signature element */
+  .ticker-section{
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:20px 0; overflow:hidden; background:var(--card);
+  }
+  .ticker-track{display:flex; gap:0; width:max-content; animation:scroll 42s linear infinite;}
+  .ticker-item{
+    display:flex; align-items:baseline; gap:10px; padding:0 40px;
+    white-space:nowrap; font-size:14.5px;
+  }
+  .ticker-item .term{font-family:'Fraunces', serif; font-weight:500; color:var(--ink);}
+  .ticker-item .def{color:var(--muted); font-family:'IBM Plex Mono', monospace; font-size:12.5px;}
+  .ticker-item .dot{color:var(--brass);}
+  @keyframes scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none; overflow-x:auto;}
+  }
+
+  /* Section shared */
+  section{padding:88px 0;}
+  .section-head{max-width:600px; margin-bottom:56px;}
+  .section-label{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--brass); margin-bottom:14px; display:block;
+  }
+  h2{font-family:'Fraunces', serif; font-weight:500; font-size:clamp(26px, 3.4vw, 36px); line-height:1.2;}
+  .section-head p{color:var(--muted); font-size:16px; margin-top:14px;}
+
+  /* Tentang */
+  .about{background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;}
+  .about-grid p{color:var(--muted); margin-bottom:16px; font-size:15.5px;}
+  .stat-row{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:32px;}
+  .stat{border-left:2px solid var(--moss); padding-left:16px;}
+  .stat .num{font-family:'Fraunces', serif; font-size:32px; font-weight:500; display:block;}
+  .stat .label{font-size:13px; color:var(--muted);}
+
+  /* Artikel */
+  .article-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; transition:transform .25s, border-color .25s; display:flex; flex-direction:column;
+  }
+  .card:hover{transform:translateY(-4px); border-color:var(--moss);}
+  .card-thumb{
+    height:150px; background:var(--moss-light); position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .card-thumb svg{width:52px; height:52px; opacity:0.5;}
+  .card-body{padding:22px 22px 26px; display:flex; flex-direction:column; flex:1;}
+  .card-tag{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--moss); margin-bottom:10px;
+  }
+  .card h3{font-family:'Fraunces', serif; font-weight:500; font-size:19px; line-height:1.32; margin-bottom:10px;}
+  .card p{color:var(--muted); font-size:14px; flex:1; margin-bottom:16px;}
+  .card-meta{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:12.5px; color:var(--muted); border-top:1px solid var(--line); padding-top:14px;
+  }
+  .card-meta .read{color:var(--ink); font-weight:500; display:flex; align-items:center; gap:4px;}
+
+  /* Sosmed */
+  .social{background:var(--ink); color:#F6F4EF;}
+  .social .section-head p{color:#B7C0AE;}
+  .social .section-label{color:var(--brass);}
+  .social-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
+  .social-card{
+    border:1px solid rgba(246,244,239,0.15); border-radius:var(--radius);
+    padding:28px; transition:border-color .2s, background .2s;
+  }
+  .social-card:hover{border-color:var(--brass); background:rgba(246,244,239,0.04);}
+  .social-card .icon{width:34px; height:34px; margin-bottom:20px; color:var(--brass);}
+  .social-card h3{font-family:'Fraunces', serif; font-size:19px; font-weight:500; margin-bottom:6px;}
+  .social-card p{color:#9BA491; font-size:13.5px; margin-bottom:16px;}
+  .social-card .handle{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--brass);}
+
+  /* Footer */
+  footer{padding:48px 0 36px; border-top:1px solid var(--line);}
+  .footer-grid{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;}
+  .footer-links{display:flex; gap:28px; font-size:14px; color:var(--muted);}
+  .footer-links a:hover{color:var(--ink);}
+  .footer-note{font-size:13px; color:var(--muted); margin-top:24px; padding-top:24px; border-top:1px solid var(--line);}
+
+  @media (max-width: 860px){
+    .nav-links{display:none;}
+    .about-grid, .article-grid, .social-grid{grid-template-columns:1fr;}
+    section{padding:64px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav wrap">
+    <a href="#" class="logo"><img src="logo.png" alt="Rekalogi"></a>
+    <div class="nav-links">
+      <a href="#tentang">Tentang</a>
+      <a href="#artikel">Artikel</a>
+      <a href="#sosial">Sosial media</a>
+    </div>
+    <a href="#sosial" class="nav-cta">Ikuti kami</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Media edukasi politik</span>
+    <h1>Politik itu <em>bisa</em> dipahami siapa saja.</h1>
+    <p>Rekalogi membedah istilah, sistem, dan peristiwa politik jadi bacaan singkat yang jujur, jelas, dan tanpa memihak.</p>
+    <div class="hero-actions">
+      <a href="#artikel" class="btn-primary">Baca artikel</a>
+      <a href="#tentang" class="btn-secondary">Kenali Rekalogi</a>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-section" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="term">Konstitusi</span><span class="def">— hukum dasar yang mengatur negara</span><span class="dot">•</span></div>
+    <div class="ticker-item"><span class="term">Oposisi</span><span class="def">— pihak yang mengawasi jalannya pemerintahan</span><span class="dot">•</span></div>
+    <div class="ticker-item"><span class="term">Ambang batas</span><span class="def">— syarat minimal suara untuk lolos parlemen</span><span class="dot">•</span></div>
+    <div class="ticker-item"><span class="term">Bikameral</span><span class="def">— sistem parlemen dua kamar</span><span class="dot">•</span></div>
+    <div class="ticker-item"><span class="term">Politik identitas</span><span class="def">— mobilisasi berbasis suku, agama, ras</span><span class="dot">•</span></div>
+    <div class="ticker-item"><span class="term">Desentralisasi</span><span class="def">— pelimpahan wewenang ke daerah</span><span class="dot">•</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item"><span class="term">Konstitusi</span><span class="def">— hukum dasar yang mengatur negara</span><span class="dot">•</span></div>
+    <div class="ticker-item"><span class="term">Oposisi</span><span class="def">— pihak yang mengawasi jalannya pemerintahan</span><span class="dot">•</span></div>
+    <div class="ticker-item"><span class="term">Ambang batas</span><span class="def">— syarat minimal suara untuk lolos parlemen</span><span class="dot">•</span></div>
+    <div class="ticker-item"><span class="term">Bikameral</span><span class="def">— sistem parlemen dua kamar</span><span class="dot">•</span></div>
+    <div class="ticker-item"><span class="term">Politik identitas</span><span class="def">— mobilisasi berbasis suku, agama, ras</span><span class="dot">•</span></div>
+    <div class="ticker-item"><span class="term">Desentralisasi</span><span class="def">— pelimpahan wewenang ke daerah</span><span class="dot">•</span></div>
+  </div>
+</div>
+
+<section class="about" id="tentang">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <span class="section-label">Tentang kami</span>
+        <h2>Bukan kubu. Bukan corong. Cuma penjelasan yang jujur.</h2>
+      </div>
+      <div>
+        <p>Rekalogi lahir dari satu keresahan sederhana: informasi politik sering ditulis untuk orang yang sudah paham politik, bukan untuk orang yang baru mau belajar.</p>
+        <p>Kami merekonstruksi ulang isu-isu politik, dari sistem pemilu sampai kebijakan publik, jadi format yang singkat, visual, dan mudah dicerna — tanpa memihak partai atau golongan manapun.</p>
+        <div class="stat-row">
+          <div class="stat"><span class="num">100%</span><span class="label">non-partisan</span></div>
+          <div class="stat"><span class="num">1 menit</span><span class="label">rata-rata baca</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="artikel">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">Bacaan terbaru</span>
+      <h2>Artikel &amp; penjelasan singkat</h2>
+      <p>Topik-topik politik yang sering bikin bingung, dijelaskan dari awal.</p>
+    </div>
+    <div class="article-grid">
+
+      <a href="#" class="card">
+        <div class="card-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/></svg></div>
+        <div class="card-body">
+          <span class="card-tag">Sistem politik</span>
+          <h3>Kenapa Indonesia pakai sistem presidensial, bukan parlementer?</h3>
+          <p>Dua sistem ini menentukan siapa yang berkuasa dan bagaimana pemerintah bisa dijatuhkan.</p>
+          <div class="card-meta"><span>6 min baca</span><span class="read">Baca →</span></div>
+        </div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="card-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 9-8 10-4.5-1-8-5-8-10V7l8-4z"/></svg></div>
+        <div class="card-body">
+          <span class="card-tag">Pemilu</span>
+          <h3>Ambang batas parlemen: siapa yang diuntungkan?</h3>
+          <p>Aturan yang menentukan partai mana yang boleh duduk di DPR, dan mana yang tidak.</p>
+          <div class="card-meta"><span>4 min baca</span><span class="read">Baca →</span></div>
+        </div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="card-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19h16M6 19V9l6-5 6 5v10M10 19v-6h4v6"/></svg></div>
+        <div class="card-body">
+          <span class="card-tag">Kebijakan publik</span>
+          <h3>Bagaimana sebenarnya sebuah undang-undang dibuat?</h3>
+          <p>Dari rancangan di meja legislatif sampai jadi hukum yang berlaku untuk semua orang.</p>
+          <div class="card-meta"><span>5 min baca</span><span class="read">Baca →</span></div>
+        </div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="card-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M2 12h20M7 7l10 10M17 7L7 17"/></svg></div>
+        <div class="card-body">
+          <span class="card-tag">Sejarah</span>
+          <h3>Reformasi 1998: apa yang sebenarnya berubah?</h3>
+          <p>Bukan cuma pergantian presiden — tapi perombakan total struktur kekuasaan.</p>
+          <div class="card-meta"><span>7 min baca</span><span class="read">Baca →</span></div>
+        </div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="card-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21c-4-3-8-6.5-8-11a8 8 0 0116 0c0 4.5-4 8-8 11z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="card-body">
+          <span class="card-tag">Otonomi daerah</span>
+          <h3>Desentralisasi: kenapa daerah bisa punya aturan sendiri?</h3>
+          <p>Wewenang yang dilimpahkan pusat ke daerah, dan batas-batasnya.</p>
+          <div class="card-meta"><span>5 min baca</span><span class="read">Baca →</span></div>
+        </div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="card-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18M7 15l4-6 3 3 5-8"/></svg></div>
+        <div class="card-body">
+          <span class="card-tag">Ekonomi politik</span>
+          <h3>Subsidi BBM: kenapa selalu jadi perdebatan tiap tahun?</h3>
+          <p>Kebijakan yang menyentuh anggaran negara sekaligus dompet warga.</p>
+          <div class="card-meta"><span>6 min baca</span><span class="read">Baca →</span></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="social" id="sosial">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">Ikuti Rekalogi</span>
+      <h2>Konten singkat, tiap minggu</h2>
+      <p>Versi video dari setiap topik, format satu menit.</p>
+    </div>
+    <div class="social-grid">
+      <a href="#" class="social-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        <h3>Instagram</h3>
+        <p>Infografis dan carousel edukasi</p>
+        <span class="handle">@rekalogi</span>
+      </a>
+      <a href="#" class="social-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 3v11a4 4 0 11-4-4"/><path d="M16 3a5 5 0 005 5"/></svg>
+        <h3>TikTok</h3>
+        <p>Penjelasan politik satu menit</p>
+        <span class="handle">@rekalogi</span>
+      </a>
+      <a href="#" class="social-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>
+        <h3>YouTube</h3>
+        <p>Shorts dan bahasan mendalam</p>
+        <span class="handle">Rekalogi</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <a href="#" class="logo"><img src="logo.png" alt="Rekalogi"></a>
+      <div class="footer-links">
+        <a href="#tentang">Tentang</a>
+        <a href="#artikel">Artikel</a>
+        <a href="#sosial">Sosial media</a>
+      </div>
+    </div>
+    <p class="footer-note">© 2026 Rekalogi. Media edukasi politik independen dan non-partisan.</p>
+  </div>
+</footer>
+
+</body>
+</html>
